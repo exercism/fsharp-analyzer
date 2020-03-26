@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     
     <PropertyGroup>
-      <TargetFramework>netcoreapp2.2</TargetFramework>
+      <TargetFramework>netcoreapp3.1</TargetFramework>
       <IsPackable>false</IsPackable>
     </PropertyGroup>
     
@@ -18,6 +18,10 @@
     
     <ItemGroup>
       <ProjectReference Include="..\..\src\Exercism.Analyzers.FSharp\Exercism.Analyzers.FSharp.fsproj" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <Folder Include="Solutions\Formatting\IndentedUsingTwoSpaces" />
     </ItemGroup>
     
     <Target Name="CopySolutions" AfterTargets="Build">
