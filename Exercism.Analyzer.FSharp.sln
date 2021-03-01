@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# 
+#
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{F0FB5FF0-868A-4A29-8472-5819FDB6572E}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Exercism.Analyzers.FSharp.IntegrationTests", "test\Exercism.Analyzers.FSharp.IntegrationTests\Exercism.Analyzers.FSharp.IntegrationTests.fsproj", "{9F1E3165-784C-43A5-8089-7CDA145D3628}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Exercism.Analyzer.FSharp.IntegrationTests", "test\Exercism.Analyzer.FSharp.IntegrationTests\Exercism.Analyzer.FSharp.IntegrationTests.fsproj", "{9F1E3165-784C-43A5-8089-7CDA145D3628}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B57BE14B-79DD-4F46-9C20-70F32DD76FE7}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Exercism.Analyzers.FSharp", "src\Exercism.Analyzers.FSharp\Exercism.Analyzers.FSharp.fsproj", "{A6556A1A-A981-4ADC-8E77-A2C46EABFB01}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Exercism.Analyzer.FSharp", "src\Exercism.Analyzer.FSharp\Exercism.Analyzer.FSharp.fsproj", "{A6556A1A-A981-4ADC-8E77-A2C46EABFB01}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
