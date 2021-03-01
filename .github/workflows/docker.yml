@@ -2,11 +2,11 @@ name: Push Docker images to DockerHub and ECR
 
 on:
   push:
-    branches: [main, master]
+    branches: [main]
 
 jobs:
   multiple-registries:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     env:
       ECR_REGISTRY: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
