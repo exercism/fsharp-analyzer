@@ -1,5 +1,5 @@
 *
 !run.sh
-!src/Exercism.Analyzers.FSharp
-src/Exercism.Analyzers.FSharp/bin
-src/Exercism.Analyzers.FSharp/obj
+!src/Exercism.Analyzer.FSharp
+src/Exercism.Analyzer.FSharp/bin/
+src/Exercism.Analyzer.FSharp/obj/

@@ -2,11 +2,11 @@ FROM mcr.microsoft.com/dotnet/sdk:5.0.103-alpine3.13-amd64 AS build
 WORKDIR /app
 
 # Copy fsproj and restore as distinct layers
-COPY src/Exercism.Analyzers.FSharp/Exercism.Analyzers.FSharp.fsproj ./
+COPY src/Exercism.Analyzer.FSharp/Exercism.Analyzer.FSharp.fsproj ./
 RUN dotnet restore -r linux-musl-x64
 
 # Copy everything else and build
-COPY . ./
+COPY src/Exercism.Analyzer.FSharp/ ./
 RUN dotnet publish -r linux-musl-x64 -c Release -o /opt/analyzer --no-restore -p:PublishReadyToRun=true
 
 # Build runtime image
