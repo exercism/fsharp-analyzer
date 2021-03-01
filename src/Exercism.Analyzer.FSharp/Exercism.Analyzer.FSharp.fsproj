@@ -4,8 +4,13 @@
     <TargetFramework>net5.0</TargetFramework>
     <OutputType>Exe</OutputType>
     <PublishTrimmed>true</PublishTrimmed>
-    <RootNamespace>Exercism.Analyzer.FSharp</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommandLineParser" Version="2.8.0" />
+    <PackageReference Include="Fantomas" Version="4.4.0" />
+    <PackageReference Include="Humanizer.Core" Version="2.8.26" />
+  </ItemGroup>
 
   <ItemGroup>
     <Compile Include="Core.fs" />
@@ -15,9 +20,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CommandLineParser" Version="2.8.0" />
-    <PackageReference Include="Fantomas" Version="4.4.0" />
-    <PackageReference Include="Humanizer.Core" Version="2.8.26" />
+    <SolutionFiles Include="Solutions\**" />
+    <Compile Remove="@(SolutionFiles)" />
   </ItemGroup>
 
 </Project>

@@ -2,12 +2,11 @@ module Exercism.Analyzer.FSharp.IntegrationTests
 
 open System.Collections.Generic
 open System.IO
-open Xunit
 open FsUnit.Xunit
 
-open System.Text.Encodings.Web
 open System.Text.Json
 open System.Text.Json.Serialization
+open Xunit
 
 type TestAnalysis = { Expected: string; Actual: string }
 
@@ -30,6 +29,8 @@ type JsonAnalysis =
       [<JsonPropertyName("comments")>]
       Comments: JsonAnalysisComment[] }
 
+let (</>) left right = Path.Combine(left, right)
+
 let private jsonSerializerOptions = JsonSerializerOptions()
 jsonSerializerOptions.IgnoreNullValues <- true
 
@@ -40,7 +41,7 @@ let normalizeAnalysisJson (json: string) =
     let normalizedJsonTestRun =
         { jsonAnalysis with
               Comments =
-                  jsonTestRun.Tests
+                  jsonAnalysis.Comments
                   |> Array.sortBy (fun test -> test.Name) }
 
     let normalizeWhitespace (str: string) = str.Replace("\r\n", "\n")
@@ -48,83 +49,36 @@ let normalizeAnalysisJson (json: string) =
     JsonSerializer.Serialize(normalizedJsonTestRun, jsonSerializerOptions)
     |> normalizeWhitespace
 
-let private runTestRunner testSolution =
+let private runAnalyzer testSolution =
     let run () =
-        Exercism.Analyzer.FSharp.Program.main [| testSolution.Slug
-                                                 testSolution.Directory
-                                                 testSolution.Directory |]
+        Program.main [| testSolution.Slug
+                        testSolution.Directory
+                        testSolution.Directory |]
 
-    let readTestRunResults () =
-        let readTestRunResultFile fileName =
+    let readAnalysisResults () =
+        let readAnalysisResultFile fileName =
             Path.Combine(testSolution.Directory, fileName)
             |> File.ReadAllText
             |> normalizeAnalysisJson
 
-        { Expected = readTestRunResultFile "results.json"
-          Actual = readTestRunResultFile "expected_results.json" }
+        { Expected = readAnalysisResultFile "analysis.json"
+          Actual = readAnalysisResultFile "expected_analysis.json" }
 
     run () |> ignore
-    readTestRunResults ()
+    readAnalysisResults ()
 
-let private assertSolutionHasExpectedResultsWithSlug (directory: string) (slug: string) =
+let private assertSolutionHasExpectedResults (slug: string) (dir: string) =
     let testSolutionDirectory =
-        Path.GetFullPath(Path.Combine([| "Solutions"; directory |]))
+        Path.GetFullPath(Path.Combine([| "Solutions"; dir |]))
 
     let testSolution =
         { Slug = slug
           Directory = testSolutionDirectory
           DirectoryName = Path.GetFileName(testSolutionDirectory) }
 
-    let testRun = runTestRunner testSolution
+    let testRun = runAnalyzer testSolution
     testRun.Actual |> should equal testRun.Expected
 
-let private assertSolutionHasExpectedResults (directory: string) =
-    assertSolutionHasExpectedResultsWithSlug directory "Fake"
-
 [<Fact>]
-let ``Single compile error`` () =
-    assertSolutionHasExpectedResults "SingleCompileError"
-
-[<Fact>]
-let ``Multiple compile errors`` () =
-    assertSolutionHasExpectedResults "MultipleCompileErrors"
-
-[<Fact>]
-let ``Multiple tests that pass`` () =
-    assertSolutionHasExpectedResults "MultipleTestsWithAllPasses"
-
-[<Fact>]
-let ``Multiple tests and single fail`` () =
-    assertSolutionHasExpectedResults "MultipleTestsWithSingleFail"
-
-[<Fact>]
-let ``Multiple tests and multiple fails`` () =
-    assertSolutionHasExpectedResults "MultipleTestsWithMultipleFails"
-
-[<Fact>]
-let ``Single test that passes`` () =
-    assertSolutionHasExpectedResults "SingleTestThatPasses"
-
-[<Fact>]
-let ``Single test that passes with different slug`` () =
-    assertSolutionHasExpectedResultsWithSlug "SingleTestThatPassesWithDifferentSlug" "Foo"
-
-[<Fact>]
-let ``Single test that fails`` () =
-    assertSolutionHasExpectedResults "SingleTestThatFails"
-
-[<Fact>]
-let ``Not implemented`` () =
-    assertSolutionHasExpectedResults "NotImplemented"
-
-[<Fact>]
-let ``Quoted and non-quoted tests`` () =
-    assertSolutionHasExpectedResults "QuotedAndNonQuotedTests"
-
-[<Fact>]
-let ``Multiple tests with test ouput`` () =
-    assertSolutionHasExpectedResults "MultipleTestsWithTestOutput"
-
-[<Fact>]
-let ``Multiple tests with test ouput exceeding limit`` () =
-    assertSolutionHasExpectedResults "MultipleTestsWithTestOutputExceedingLimit"
+let ``No analyzer implemented for exercise`` () =
+    assertSolutionHasExpectedResults "Fake" ("General" </> "NoAnalyzerImplemented")

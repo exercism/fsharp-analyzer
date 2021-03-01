@@ -29,7 +29,7 @@ let private createAnalysisContext options =
     { SolutionFiles = [| options.InputDirectory </> sprintf "%s.fs" exercise |]
       AnalysisJsonFile = options.OutputDirectory </> "analysis.json" }
 
-let private runTestRunner options =
+let private runAnalyzer options =
     let currentDate () = DateTimeOffset.UtcNow.ToString("u")
 
     printfn "[%s] Running analyzer for '%s' solution..." (currentDate ()) options.Slug
@@ -44,6 +44,6 @@ let private runTestRunner options =
 let main argv =
     match parseOptions argv with
     | Some options ->
-        runTestRunner options
+        runAnalyzer options
         0
     | None -> 1
