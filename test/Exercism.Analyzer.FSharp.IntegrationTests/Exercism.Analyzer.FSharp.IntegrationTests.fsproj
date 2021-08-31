@@ -1,25 +1,31 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     
     <PropertyGroup>
-      <TargetFramework>netcoreapp2.2</TargetFramework>
+      <TargetFramework>net5.0</TargetFramework>
       <IsPackable>false</IsPackable>
+      <RootNamespace>Exercism.Analyzer.FSharp.IntegrationTests</RootNamespace>
     </PropertyGroup>
     
     <ItemGroup>
-      <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
+      <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.1" />
       <PackageReference Include="xunit" Version="2.4.1" />
-      <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
+      <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3" />
+      <PackageReference Include="FsUnit.xUnit" Version="4.0.4" />
     </ItemGroup>
     
+    <ItemGroup>
+      <Compile Include="Tests.fs" />
+    </ItemGroup>
+
     <ItemGroup>
       <SolutionFiles Include="Solutions\**" />
-      <Compile Include="ExerciseAnalyzerTests.fs" />
+      <Compile Remove="@(SolutionFiles)" />
     </ItemGroup>
     
     <ItemGroup>
-      <ProjectReference Include="..\..\src\Exercism.Analyzers.FSharp\Exercism.Analyzers.FSharp.fsproj" />
+      <ProjectReference Include="..\..\src\Exercism.Analyzer.FSharp\Exercism.Analyzer.FSharp.fsproj" />
     </ItemGroup>
-    
+
     <Target Name="CopySolutions" AfterTargets="Build">
       <RemoveDir Directories="$(OutputPath)\Solutions" />
       <Copy SourceFiles="@(SolutionFiles)" DestinationFolder="$(OutputPath)\Solutions\%(RecursiveDir)" SkipUnchangedFiles="true" />
