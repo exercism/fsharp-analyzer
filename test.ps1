@@ -34,6 +34,10 @@ $Env:UPDATE_COMMENTS = $UpdateComments.IsPresent
 
 dotnet test
 
+$ExitCode = $LastExitCode
+
 if ($UpdateAnalysis.IsPresent -or $UpdateComments.IsPresent) {
     ./format.ps1
 }
+
+exit $ExitCode
