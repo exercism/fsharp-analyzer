@@ -6,3 +6,4 @@ src/Exercism.Analyzer.FSharp/obj/
 .appends
 .git
 .github
+.gitignore
