@@ -21,7 +21,7 @@ type JsonAnalysis =
       Comments: JsonAnalysisComment[] }
 
 let private jsonSerializerOptions = JsonSerializerOptions()
-jsonSerializerOptions.IgnoreNullValues <- true
+jsonSerializerOptions.DefaultIgnoreCondition <- JsonIgnoreCondition.WhenWritingNull
 jsonSerializerOptions.WriteIndented <- true
 
 let private toJsonAnalysisCommentType (analysisCommentType: AnalysisCommentType) =

@@ -32,7 +32,7 @@ type JsonAnalysis =
 let (</>) left right = Path.Combine(left, right)
 
 let private jsonSerializerOptions = JsonSerializerOptions()
-jsonSerializerOptions.IgnoreNullValues <- true
+jsonSerializerOptions.DefaultIgnoreCondition <- JsonIgnoreCondition.WhenWritingNull
 
 let normalizeAnalysisJson (json: string) =
     let jsonAnalysis =
