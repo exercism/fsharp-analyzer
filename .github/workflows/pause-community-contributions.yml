@@ -16,6 +16,6 @@ permissions:
 jobs:
   pause:
     if: github.repository_owner == 'exercism' # Stops this job from running on forks
-    uses: exercism/github-actions/.github/workflows/community-contributions.yml@community-contributions-reuseable-workflow
+    uses: exercism/github-actions/.github/workflows/community-contributions.yml@3390a06eae3295d427e35adfc15c0bf5d7f32973
     with:
       forum_category: fsharp
