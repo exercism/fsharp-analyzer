@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:6.0.401-alpine3.16-amd64 AS build
+FROM mcr.microsoft.com/dotnet/sdk:7.0.306-alpine3.18-amd64 AS build
 WORKDIR /app
 
 # Copy fsproj and restore as distinct layers
@@ -10,7 +10,7 @@ COPY src/Exercism.Analyzer.FSharp/ ./
 RUN dotnet publish -r linux-musl-x64 -c Release -o /opt/analyzer --no-restore --self-contained true
 
 # Build runtime image
-FROM mcr.microsoft.com/dotnet/runtime-deps:6.0.9-alpine3.16-amd64
+FROM mcr.microsoft.com/dotnet/runtime-deps:7.0.9-alpine3.18-amd64 AS runtime
 WORKDIR /opt/analyzer
 
 COPY --from=build /opt/analyzer/ .
