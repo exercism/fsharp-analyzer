@@ -20,3 +20,6 @@ obj/
 
 # Misc files
 *.DS_Store
+
+analysis.json
+!/bin/
