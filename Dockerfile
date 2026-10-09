@@ -10,7 +10,7 @@ COPY src/Exercism.Analyzer.FSharp/ ./
 RUN dotnet publish -r linux-musl-x64 -c Release -o /opt/analyzer --no-restore --self-contained true
 
 # Build runtime image
-FROM mcr.microsoft.com/dotnet/runtime-deps:7.0.9-alpine3.18-amd64 AS runtime
+FROM mcr.microsoft.com/dotnet/runtime-deps:8.0.6-alpine3.18-amd64 AS runtime
 WORKDIR /opt/analyzer
 
 COPY --from=build /opt/analyzer/ .
