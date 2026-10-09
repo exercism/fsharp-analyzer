@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:7.0.306-alpine3.18-amd64 AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0.301-alpine3.18-amd64 AS build
 WORKDIR /app
 
 # Copy fsproj and restore as distinct layers
