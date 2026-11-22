@@ -1,0 +1,5 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Exercism.Analyzer.FSharp/Exercism.Analyzer.FSharp.fsproj" />
+  </Folder>
+</Solution>
